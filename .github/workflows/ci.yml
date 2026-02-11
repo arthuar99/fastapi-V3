@@ -7,6 +7,8 @@ on:
             - develop
             - staging
             - test
+        tags:
+            - "v*"
     workflow_dispatch:
 
 env:
@@ -44,6 +46,8 @@ jobs:
                   tags: |
                       type=sha,format=long
                       type=ref,event=branch
+                      type=semver,pattern={{version}}
+                      type=semver,pattern={{major}}.{{minor}}
                       type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
 
             - name: Build and push Docker image
