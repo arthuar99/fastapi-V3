@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   alembic:
-    image: fastapi-base:latest
+    image: ${IMAGE_NAME:-fastapi-base}:${TAG:-latest}
     environment:
       SQL_DATABASE_URL: 'postgresql+psycopg2://postgres:postgres@db:5432/postgres'
       SECRET_KEY: ${SECRET_KEY}
@@ -26,7 +26,7 @@ services:
       - db
 
   app:
-    image: fastapi-base:latest
+    image: ${IMAGE_NAME:-fastapi-base}:${TAG:-latest}
     environment:
       PROJECT_NAME: ${PROJECT_NAME}
       SQL_DATABASE_URL: 'postgresql+psycopg2://postgres:postgres@db:5432/postgres'
